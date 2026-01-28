@@ -48,7 +48,7 @@ const messagesConfig = [
         <p>Two?</p>
         `,
         textColor: '#ffffff',
-        fontSize: '13vh',
+        fontSize: '15vh',
         color: '#ff3366',
         enlarged: false,
         compact: false,
@@ -58,7 +58,7 @@ const messagesConfig = [
     {
         // Msg 2: Starter (Index 1)
         text: `
-        <p style="text-decoration: underline;">STARTER: SHARED PLATE:</p>
+        <p>STARTER: SHARED PLATE:</p>
         <p>Crumbed Camembert w. Plum Sauce,</p>
         <p>Chicken Poppers w. Sriracha Aioli</p>
         <p>& Cauli-bites w. Hot Honey.</p>
@@ -74,7 +74,7 @@ const messagesConfig = [
     {
         // Msg 3: Main (Index 2)
         text: `
-        <p style="text-decoration: underline;">MAIN: CHOOSE 2:</p>
+        <p>MAIN: CHOOSE 2:</p>
         <p>1 Sirloin Med Rare w. Veg & Jus.</p>
         <p>2 Ooh La La Chicken w. Mash & Greens.</p>
         <p>3 Salmon w. Veg, Salad & Sauce.</p>
@@ -91,7 +91,7 @@ const messagesConfig = [
     {
         // Msg 4: Dessert (Index 3)
         text: `
-        <p style="text-decoration: underline;">DESSERT: SHARED PLATE:</p>
+        <p>DESSERT: SHARED PLATE:</p>
         <p>Chocolate Cheesecake, Apple Shortcake,</p>
         <p>Berries, Cream & Berry Sorbet</p>
         `,
