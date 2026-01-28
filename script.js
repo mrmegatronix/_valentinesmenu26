@@ -135,10 +135,9 @@ function updateMessage() {
             messageContainer.classList.add('full-screen');
         }
 
-        // 5. ADJUST SIZE & FADE IN
-        // Use 13vh for slide 1 (index 0) and 12vh for others
-        const baseSize = (currentMessageIndex === 0) ? '13vh' : '12vh';
-        adjustFontSize(messageContainer, baseSize, () => {
+        // 5. MAXIMIZE SIZE & FADE IN
+        // Standardize everything to 15vh for consistency
+        adjustFontSize(messageContainer, '15vh', () => {
             requestAnimationFrame(() => {
                 messageContainer.classList.remove('fade-out');
             });
