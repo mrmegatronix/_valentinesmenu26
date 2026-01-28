@@ -1,0 +1,316 @@
+:root {
+  --bg-color: #000000;
+  --accent-purple: #2e003e;
+  --heart-color: #ff3366;
+  --heart-shadow: #ff336680;
+  --text-color: #ffffff;
+  --neon-purple: #d000ff;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  background: radial-gradient(
+    circle at center,
+    var(--accent-purple),
+    var(--bg-color)
+  );
+  font-family: "Outfit", sans-serif;
+  overflow: hidden;
+  position: relative;
+  color: var(--text-color);
+  font-size: 16px;
+}
+
+@media (min-width: 1920px) {
+  body {
+    font-size: 20px;
+  }
+}
+
+.confetti-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.heart-confetti {
+  position: absolute;
+  color: #ff69b4;
+  /* Hot pink */
+  font-size: 1.5rem;
+  animation: fall linear forwards;
+  opacity: 0.8;
+  z-index: 1;
+}
+
+.logo-confetti {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: fall linear forwards;
+  opacity: 0.7;
+  z-index: 1;
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(-10vh) translateX(0) rotate(0deg);
+    opacity: 1;
+  }
+
+  25% {
+    transform: translateY(20vh) translateX(15px) rotate(90deg);
+  }
+
+  50% {
+    transform: translateY(50vh) translateX(-15px) rotate(180deg);
+  }
+
+  75% {
+    transform: translateY(80vh) translateX(15px) rotate(270deg);
+  }
+
+  100% {
+    transform: translateY(110vh) translateX(0) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.content {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  overflow: hidden;
+}
+
+.heart-container {
+  position: relative;
+  width: 80vh;
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: pulse 4s infinite ease-in-out;
+}
+
+.heart {
+  background-color: var(--heart-color);
+  width: 53vh;
+  height: 53vh;
+  position: relative;
+  transform: rotate(-45deg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  filter: drop-shadow(0 0 20px var(--heart-shadow))
+    drop-shadow(0 0 40px var(--neon-purple));
+  transition: transform 2s ease-in-out, background-color 1.5s ease;
+}
+
+.heart::before,
+.heart::after {
+  content: "";
+  background-color: var(--heart-color);
+  border-radius: 50%;
+  width: 53vh;
+  height: 53vh;
+  position: absolute;
+  transition: background-color 1.5s ease;
+}
+
+.heart::before {
+  top: -26.5vh;
+  left: 0;
+}
+
+.heart::after {
+  top: 0;
+  left: 26.5vh;
+}
+
+.message {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 20;
+  transition: opacity 1s ease-in-out, font-size 0.3s ease;
+  width: 95vw;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Dancing Script', cursive;
+  font-weight: 1000;
+  font-size: inherit; /* Allow JS/inheritance to control size */
+  line-height: 0.95;
+  color: #ffffff;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.8), 0 0 10px rgba(0,0,0,0.5);
+  padding: 2vh 0; /* Add vertical padding for better centering */
+  opacity: 1;
+}
+
+.message.fade-out {
+    opacity: 0;
+}
+
+.message p {
+    margin: 2px 0;
+    white-space: nowrap;
+}
+
+.message.compact {
+    line-height: 0.95;
+    width: 95vw;
+}
+
+.bottom-message {
+  position: fixed;
+  bottom: 50px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  z-index: 100;
+  transition: opacity 1s ease-in-out;
+  opacity: 1;
+}
+
+.bottom-message p {
+    margin: 5px 0;
+    font-size: clamp(1rem, 2vh, 1.5rem);
+}
+
+.bottom-message.hidden {
+  display: none !important;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Enlarged Heart State (Full Screen Transition) */
+.heart-container.enlarged .heart {
+    transform: rotate(-45deg) scale(6); /* Massive scale to cover screen */
+}
+/* No change needed for message as it is independent now */
+
+/* --- Progress Bar --- */
+.progress-container {
+    position: fixed;
+    bottom: 25px; /* Moved up to prevent heart clipping (15px bar + 15px heart overhang) */
+    left: 0;
+    width: calc(100% - 40px); 
+    margin: 0 20px;
+    height: 15px;
+    background-color: #2e003e; 
+    z-index: 100;
+    border-radius: 10px;
+}
+
+.progress-bar {
+    width: 0%;
+    height: 100%;
+    border-radius: 10px; /* Rounded corners */
+    /* Red Glitter Effect */
+    background: linear-gradient(45deg, #ff0000 25%, #cc0000 25%, #cc0000 50%, #ff0000 50%, #ff0000 75%, #cc0000 75%, #cc0000 100%);
+    background-size: 10px 10px;
+    box-shadow: 0 0 10px #ff0000, 0 0 20px #ff3366;
+    position: relative;
+    transition: width linear; /* Controlled by JS or CSS transition */
+}
+
+/* Heart Indicator */
+.progress-bar::after {
+    content: "❤";
+    position: absolute;
+    right: -15px; /* Half width of heart roughly */
+    top: 50%;
+    transform: translateY(-56%);
+    font-size: 30px;
+    color: #ff3366;
+    text-shadow: 0 0 5px #fff;
+    filter: drop-shadow(0 0 5px red);
+    z-index: 101;
+}
+
+/* --- Text Animation --- */
+.word {
+    opacity: 0;
+    display: inline-block; /* Allows transform if needed */
+    transition: opacity 0.5s ease-in-out;
+    margin-right: 0.2em; /* Ensure spaces between words */
+}
+
+.word.visible {
+    opacity: 1;
+}
+
+/* Hidden Controls */
+.controls {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80px; /* Larger trigger area */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    z-index: 200;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+    background: rgba(0,0,0,0.5);
+}
+
+.controls:hover {
+    opacity: 1;
+    visibility: visible;
+}
+
+.white-text, .white-text p, .white-text .word {
+    color: #ffffff !important;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.9), 0 0 15px rgba(0,0,0,0.7) !important;
+}
+
+.hidden-heart {
+    display: none !important;
+}
+
+.controls:hover {
+    opacity: 1;
+}
+
+.controls button {
+    padding: 10px 20px;
+    background: white;
+    color: black;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+/* Ensure Progress Bar is top-most visible */
+.progress-container {
+    z-index: 9999 !important; /* Force on top */
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Visibility fix */
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
