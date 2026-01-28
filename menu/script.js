@@ -74,7 +74,6 @@ const messagesConfig = [
     {
         // Msg 3: Main (Index 2)
         text: `
-        <p style="margin-bottom: 2vh;">Valentine's Day Set Menu</p>
         <p style="text-decoration: underline;">MAIN: CHOOSE 2:</p>
         <p>1 Sirloin Med Rare w. Veg & Jus.</p>
         <p>2 Ooh La La Chicken w. Mash & Greens.</p>
@@ -82,7 +81,7 @@ const messagesConfig = [
         <p>4 Pumpkin, Spinach, Feta Filo Parcel.</p>
         `,
         textColor: '#ffffff',
-        fontSize: '12vh',
+        fontSize: '15vh',
         color: 'rgba(170, 0, 255, 0.5)',
         enlarged: true,
         compact: true,
@@ -191,24 +190,24 @@ function wrapWords(htmlString) {
     return tempDiv.innerHTML;
 }
 
-function adjustFontSize(element, startSize, callback) {
-    element.style.fontSize = startSize;
-    // RELAXED SAFE ZONE: 95% of viewport
-    const maxH = window.innerHeight * 0.95;
-    const maxW = window.innerWidth * 0.95;
+function adjustFontSize(element, targetSize, callback) {
+    // STANDARD MASSIVE SIZE: 15vh (25% increase from previous 12vh)
+    const baseSize = 15; 
+    const unit = 'vh';
+    element.style.fontSize = baseSize + unit;
+
+    const maxH = window.innerHeight * 0.96;
+    const maxW = window.innerWidth * 0.96;
 
     requestAnimationFrame(() => {
-        let size = parseFloat(startSize);
-        let unit = startSize.replace(/[0-9.]/g, '');
+        let size = baseSize;
         let attempts = 0;
-        const minSize = unit === 'vh' ? 5 : 4; 
+        const minSize = 4; 
 
         while (attempts < 60) {
-            const currentH = element.scrollHeight;
-            const currentW = element.scrollWidth;
-            if (currentH <= maxH && currentW <= maxW) break;
+            if (element.scrollHeight <= maxH && element.scrollWidth <= maxW) break;
             
-            size *= 0.98; // Gentler shrink
+            size -= 0.1; 
             if (size < minSize) {
                 size = minSize;
                 element.style.fontSize = size + unit;

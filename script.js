@@ -67,23 +67,28 @@ const durations = [
     60000  // Msg 6: 1 minute
 ];
 
-function adjustFontSize(element, startSize, callback) {
-    element.style.fontSize = startSize;
-    // RELAXED SAFE ZONE: 95% of viewport to allow for maximum "Massive" look
-    const maxH = window.innerHeight * 0.95; 
-    const maxW = window.innerWidth * 0.95;
+function adjustFontSize(element, targetSize, callback) {
+    // STANDARD MASSIVE SIZE: 15vh (25% increase from previous 12vh)
+    const baseSize = 15; 
+    const unit = 'vh';
+    element.style.fontSize = baseSize + unit;
 
-    // Run measurement in a RAF to ensure layout is ready
+    // Use 96% safe zone for a "fill screen" look
+    const maxH = window.innerHeight * 0.96; 
+    const maxW = window.innerWidth * 0.96;
+
     requestAnimationFrame(() => {
-        let size = parseFloat(startSize);
-        let unit = startSize.replace(/[0-9.]/g, '');
+        let size = baseSize;
         let attempts = 0;
         
-        while (attempts < 50 && (element.scrollHeight > maxH || element.scrollWidth > maxW)) {
-            size *= 0.98; // Gentler shrink
+        // Only shrink if it exceeds the safe zone, ensuring consistency where possible
+        while (attempts < 60 && (element.scrollHeight > maxH || element.scrollWidth > maxW)) {
+            size -= 0.1; // Very fine-grained for maximum possible size
             element.style.fontSize = size + unit;
             attempts++;
+            if (size < 4) break; 
         }
+        
         if (callback) callback();
     });
 }
