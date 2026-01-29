@@ -93,7 +93,7 @@ const messagesConfig = [
         duration: 60000
     },
     {
-        // Msg 3: Main (Index 2)
+        // Msg 3: Main (Index 3)
         text: `
         <p class="red-title">Valentine's Day Set Menu:</p>
         <p>MAINS: CHOICE OF 2:</p>
@@ -111,7 +111,7 @@ const messagesConfig = [
         duration: 60000
     },
     {
-        // Msg 4: Dessert (Index 3)
+        // Msg 4: Dessert (Index 4)
         text: `
         <p class="red-title">Valentine's Day Set Menu:</p>
         <p>DESSERT: SHARED PLATE:</p>
@@ -127,7 +127,7 @@ const messagesConfig = [
         duration: 60000
     },
     {
-        // Msg 5: Hey You! (Index 4)
+        // Msg 5: Hey You! (Index 5)
         text: `
         <p>Hey You! Yes, You!</p>
         <p>You and Boo</p>
@@ -145,7 +145,7 @@ const messagesConfig = [
         duration: 60000
     },
     {
-        // Msg 6: Contact & Price (Index 5)
+        // Msg 6: Contact & Price (Index 6)
         text: `
         <p>Book Online: coasterstavern.co.nz</p>
         <p>or Call us: 352 0210</p>
@@ -245,6 +245,7 @@ function displayMessage(index) {
     setTimeout(() => {
         const config = messagesConfig[index];
         const duration = config.duration || 60000;
+        console.log(`Displaying Slide ${index}:`, config.text.substring(0, 50).replace(/<[^>]*>/g, '').trim());
 
         // 3. UPDATE PROGRESS
         const totalDuration = messagesConfig.reduce((sum, msg) => sum + (msg.duration || 60000), 0);
