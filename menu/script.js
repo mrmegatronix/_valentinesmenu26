@@ -127,7 +127,7 @@ const messagesConfig = [
         <p>So to book your table of Two<p> 
         <p>Just Call us on: </p>
         <p>(three five two ooh two one ohh) (352 0210) </p>
-        <p> Or book online at: coasterstaver.co.nz or scan thee code below...</p>
+        <p> Or book online at: coasterstaver.co.nz, or scan thee code below...</p>
         <br>
         <p>It's Only...</p>
         <p>$90 FOR TWO</p>
