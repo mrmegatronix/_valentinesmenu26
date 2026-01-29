@@ -50,7 +50,7 @@ const messagesConfig = [
         <p>Two?</p>
         `,
         textColor: '#ffffff',
-        fontSize: '15vh',
+        fontSize: '13vh',
         color: '#ff3366',
         enlarged: false,
         compact: false,
@@ -68,7 +68,7 @@ const messagesConfig = [
         <p class="red-title">$90 for Two</p>
         `,
         textColor: '#ffffff',
-        fontSize: '15vh',
+        fontSize: '13vh',
         color: 'rgba(255, 105, 180, 0.5)',
         enlarged: false,
         compact: false,
@@ -85,7 +85,7 @@ const messagesConfig = [
         <p>& Cauli-bites w. Hot Honey.</p>
         `,
         textColor: '#ffffff',
-        fontSize: '15vh',
+        fontSize: '13vh',
         color: 'rgba(255, 0, 0, 0.5)',
         enlarged: true,
         compact: true,
@@ -103,7 +103,7 @@ const messagesConfig = [
         <p>4 Pumpkin, Spinach, Feta Filo.</p>
         `,
         textColor: '#ffffff',
-        fontSize: '15vh',
+        fontSize: '13vh',
         color: 'rgba(170, 0, 255, 0.5)',
         enlarged: true,
         compact: true,
@@ -119,7 +119,7 @@ const messagesConfig = [
         <p>Berries, Cream & Berry Sorbet</p>
         `,
         textColor: '#ffffff',
-        fontSize: '15vh',
+        fontSize: '13vh',
         color: 'rgba(0, 102, 255, 0.5)',
         enlarged: true,
         compact: true,
@@ -137,7 +137,7 @@ const messagesConfig = [
         <p>of Two!</p>
         `,
         textColor: '#ffffff',
-        fontSize: '15vh',
+        fontSize: '13vh',
         color: 'rgba(255, 20, 147, 0.5)',
         enlarged: true,
         compact: true,
@@ -156,7 +156,7 @@ const messagesConfig = [
         <p>It's Only... $90 for TWO</p>
         `,
         textColor: '#ffffff',
-        fontSize: '15vh',
+        fontSize: '13vh',
         color: '#ff3366',
         enlarged: false,
         compact: true,

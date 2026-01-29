@@ -50,7 +50,7 @@ const messagesConfig = [
         <p>Two?</p>
         `,
         textColor: '#ffffff',
-        fontSize: '15vh',
+        fontSize: '13vh',
         color: '#ff3366',
         enlarged: false,
         compact: false,
@@ -68,7 +68,7 @@ const messagesConfig = [
         <p class="red-title">$90 for Two</p>
         `,
         textColor: '#ffffff',
-        fontSize: '15vh',
+        fontSize: '13vh',
         color: 'rgba(255, 105, 180, 0.5)',
         enlarged: false,
         compact: false,
@@ -85,7 +85,7 @@ const messagesConfig = [
         <p>& Cauli-bites w. Hot Honey.</p>
         `,
         textColor: '#ffffff',
-        fontSize: '15vh',
+        fontSize: '13vh',
         color: 'rgba(255, 0, 0, 0.5)',
         enlarged: true,
         compact: true,
@@ -103,7 +103,7 @@ const messagesConfig = [
         <p>4 Pumpkin, Spinach, Feta Filo.</p>
         `,
         textColor: '#ffffff',
-        fontSize: '15vh',
+        fontSize: '13vh',
         color: 'rgba(170, 0, 255, 0.5)',
         enlarged: true,
         compact: true,
@@ -119,7 +119,7 @@ const messagesConfig = [
         <p>Berries, Cream & Berry Sorbet</p>
         `,
         textColor: '#ffffff',
-        fontSize: '15vh',
+        fontSize: '13vh',
         color: 'rgba(0, 102, 255, 0.5)',
         enlarged: true,
         compact: true,
@@ -137,7 +137,7 @@ const messagesConfig = [
         <p>of Two!</p>
         `,
         textColor: '#ffffff',
-        fontSize: '15vh',
+        fontSize: '13vh',
         color: 'rgba(255, 20, 147, 0.5)',
         enlarged: true,
         compact: true,
@@ -148,7 +148,7 @@ const messagesConfig = [
         // Msg 6: Contact & Price (Index 6)
         text: `
         <p>Book Online: coasterstavern.co.nz</p>
-        <p>or Ring us: 352 0210</p>
+        <p>or Call us: 352 0210</p>
         <p>or Scan the Code Below:</p>
         <div id="qr-placeholder" style="margin-top: 1vh; display: flex; flex-direction: column; align-items: center;">
            <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https%3A%2F%2Fbookings.nowbookit.com%2F%3Faccountid%3Dd7034cd3-cfde-4556-a98c-ea943ec35ef4%26venueid%3D13703%26theme%3Ddark%26colors%3Dhex%2Cff2d6f%26date%3D2026-02-14%26serviceids%3Devent" alt="Scan to Book" style="border: 2px solid white; border-radius: 10px; width: 18vh; height: 18vh;">
@@ -156,7 +156,7 @@ const messagesConfig = [
         <p>It's Only... $90 for TWO</p>
         `,
         textColor: '#ffffff',
-        fontSize: '15vh',
+        fontSize: '13vh',
         color: '#ff3366',
         enlarged: false,
         compact: true,
