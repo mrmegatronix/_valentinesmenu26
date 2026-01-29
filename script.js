@@ -93,16 +93,14 @@ const messagesConfig = [
         duration: 60000
     },
     {
-        // Msg 3: Main (Index 3) - Re-created for fresh state with manual adjustments
+        // Msg 3: Mains (Index 3) - Re-created for fresh state with manual adjustments
         text: `
-        <div class="mains-text">
-            <p class="red-title">Valentine's Day Set Menu:</p>
-            <p class="red-title">MAINS: CHOICE OF 2:</p>
-            <p>1 Sirloin Steak Medium Rare w. Veg & Red Wine Jus.</p>
-            <p>2 Ooh La La Chicken w. Pumpkin Mash & Greens.</p>
-            <p>3 Salmon w. Veg, Salad & Lemon Mustard Sauce.</p>
-            <p>4 Pumpkin, Spinach, Feta Filo Parcel w. Salad.</p>
-        </div>
+        <p class="red-title">Valentine's Day Set Menu:</p>
+        <p class="red-title">MAINS: CHOICE OF 2:</p>
+        <p>1 Sirloin Steak Medium Rare.</p>
+        <p>2 Ooh La La Chicken.</p>
+        <p>3 Salmon Fillet.</p>
+        <p>4 Pumpkin, Spinach, Feta Filo.</p>
         `,
         textColor: '#ffffff',
         fontSize: '15vh',
