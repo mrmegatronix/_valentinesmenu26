@@ -275,8 +275,7 @@ body {
 }
 
 .content .message .red-title, 
-.content .message .red-title p, 
-.content .message .red-title .word {
+.content .message .red-title p {
     color: #ff0000 !important;
     font-weight: bold !important;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.8) !important;
@@ -285,6 +284,12 @@ body {
     display: block !important;
     white-space: nowrap !important;
     margin-bottom: 0.5vh !important;
+}
+
+.content .message .red-title .word {
+    color: #ff0000 !important;
+    display: inline !important;
+    white-space: nowrap !important;
 }
 
 .hidden-heart {
