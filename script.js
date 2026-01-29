@@ -61,11 +61,11 @@ const messagesConfig = [
         // Msg 1.5: Deal (Index 1)
         text: `
         <p class="red-title">Valentine's Day</p>
-        <p>3 Course Set Menu</p>
+        <p class="red-title">3 Course Set Menu</p>
         <p>1 Shared Starter Plate</p>
         <p>Choice of 2 Mains</p>
         <p>1 Shared Dessert Plate</p>
-        <p>$90 for Two</p>
+        <p class="red-title">$90 for Two</p>
         `,
         textColor: '#ffffff',
         fontSize: '15vh',
@@ -79,7 +79,7 @@ const messagesConfig = [
         // Msg 2: Starter (Index 2)
         text: `
         <p class="red-title">Valentine's Day Set Menu:</p>
-        <p>STARTER: SHARED PLATE:</p>
+        <p class="red-title">STARTER: SHARED PLATE:</p>
         <p>Crumbed Camembert w. Plum Sauce,</p>
         <p>Chicken Poppers w. Sriracha Aioli</p>
         <p>& Cauli-bites w. Hot Honey.</p>
@@ -96,7 +96,7 @@ const messagesConfig = [
         // Msg 3: Main (Index 3)
         text: `
         <p class="red-title">Valentine's Day Set Menu:</p>
-        <p>MAINS: CHOICE OF 2:</p>
+        <p class="red-title">MAINS: CHOICE OF 2:</p>
         <p>1 Sirloin Steak Medium Rare w. Veg & Red Wine Jus.</p>
         <p>2 Ooh La La Chicken w. Pumpkin Mash & Greens.</p>
         <p>3 Salmon w. Veg, Salad & Lemon Mustard Sauce.</p>
@@ -114,7 +114,7 @@ const messagesConfig = [
         // Msg 4: Dessert (Index 4)
         text: `
         <p class="red-title">Valentine's Day Set Menu:</p>
-        <p>DESSERT: SHARED PLATE:</p>
+        <p class="red-title">DESSERT: SHARED PLATE:</p>
         <p>Chocolate Cheesecake, Apple Shortcake,</p>
         <p>Berries, Cream & Berry Sorbet</p>
         `,
