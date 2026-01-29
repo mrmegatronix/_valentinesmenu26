@@ -124,14 +124,17 @@ const messagesConfig = [
     {
         // Msg 6: Contact & Price (Index 5)
         text: `
-        <p>Ring us: 352 0210</p>
-        <p>(three five two ooh two one ohh)</p>
+        <p>So to book your table of Two<p> 
+        <p>Just Call us on: </p>
+        <p>(three five two ooh two one ohh) (352 0210) </p>
+        <p> Or book online at: coasterstaver.co.nz or scan thee code below...</p>
         <br>
         <p>It's Only...</p>
         <p>$90 FOR TWO</p>
+        <br>
         <div id="qr-placeholder" style="margin-top: 1vh; display: flex; flex-direction: column; align-items: center;">
            <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https%3A%2F%2Fbookings.nowbookit.com%2F%3Faccountid%3Dd7034cd3-cfde-4556-a98c-ea943ec35ef4%26venueid%3D13703%26theme%3Ddark%26colors%3Dhex%2Cff2d6f%26date%3D2026-02-14%26serviceids%3Devent" alt="Scan to Book" style="border: 2px solid white; border-radius: 10px; width: 28vh; height: 28vh;">
-           <p style="font-size: 3.5vh; margin-top: 1vh; font-family: 'Outfit', sans-serif; white-space: nowrap;">scan code to book your table</p>
+        <br>
         </div>
         `,
         textColor: '#ffffff',
@@ -139,7 +142,7 @@ const messagesConfig = [
         color: '#ff3366',
         enlarged: false,
         compact: true,
-        hideFooter: false,
+        hideFooter: true,
         duration: 60000
     }
 ];
