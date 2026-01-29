@@ -164,8 +164,9 @@ body {
   line-height: 0.95;
   color: #ffffff;
   text-shadow: 2px 2px 4px rgba(0,0,0,0.8), 0 0 10px rgba(0,0,0,0.5);
-  padding: 2vh 0; /* Add vertical padding for better centering */
+  padding: 2vh 0;
   opacity: 1;
+  pointer-events: none; /* Prevent interference with controls */
 }
 
 .message.fade-out {
@@ -259,6 +260,11 @@ body {
 
 .word.visible {
     opacity: 1;
+}
+
+#qr-placeholder img {
+    max-width: 90vw;
+    object-fit: contain;
 }
 
 /* Hidden Controls */
