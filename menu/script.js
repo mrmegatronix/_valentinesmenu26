@@ -93,9 +93,9 @@ const messagesConfig = [
         // Msg 4: Dessert (Index 3)
         text: `
         <p class="red-title">Valentine's Day Set Menu</p>
-        <p>DESSERT: SHARED PLATE:</p>
-        <p>Chocolate Cheesecake, Apple Shortcake,</p>
-        <p>Berries, Cream & Berry Sorbet</p>
+        <p>DESSERT shared plate:</p>
+        <p>Choc Cheesecake, Apple Shortcake,</p>
+        <p>Berries, Cream & Sorbet</p>
         `,
         textColor: '#ffffff',
         fontSize: '15vh',

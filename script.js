@@ -97,9 +97,6 @@ const messagesConfig = [
         <p>Choc Cheesecake, Apple Shortcake,</p>
         <p>Berries, Cream & Sorbet</p>
         `,
-创新: 
-1. Shortened labels and ingredients.
-2. Kept the red-title for slide 4.
         textColor: '#ffffff',
         fontSize: '15vh',
         color: 'rgba(0, 102, 255, 0.5)',
