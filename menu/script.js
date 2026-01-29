@@ -74,14 +74,14 @@ const messagesConfig = [
     {
         // Msg 3: Main (Index 2)
         text: `
-        <p>MAIN: CHOOSE 2:</p>
+        <p>MAINS: CHOICE OF 2:</p>
         <p>1 Sirloin Med Rare w. Veg & Jus.</p>
         <p>2 Ooh La La Chicken w. Mash & Greens.</p>
         <p>3 Salmon w. Veg, Salad & Sauce.</p>
         <p>4 Pumpkin, Spinach, Feta Filo Parcel.</p>
         `,
         textColor: '#ffffff',
-        fontSize: '15vh',
+        fontSize: '12vh',
         color: 'rgba(170, 0, 255, 0.5)',
         enlarged: true,
         compact: true,
