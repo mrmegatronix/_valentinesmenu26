@@ -318,3 +318,13 @@ body {
     transform: scale(1.1);
     box-shadow: 0 0 20px rgba(255, 51, 102, 0.6);
 }
+
+/* Specific scaling help for longer slides like Mains */
+.mains-text {
+    line-height: 0.85 !important;
+}
+
+.mains-text p {
+    white-space: normal !important;
+    margin: 0.1vh 0 !important;
+}
