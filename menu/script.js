@@ -78,7 +78,6 @@ const messagesConfig = [
     {
         // Msg 2: Starter (Index 2)
         text: `
-        <p class="red-title">Valentine's Day Set Menu:</p>
         <p class="red-title">STARTER: SHARED PLATE:</p>
         <p>Crumbed Camembert w. Plum Sauce,</p>
         <p>Chicken Poppers w. Sriracha Aioli</p>
@@ -95,12 +94,11 @@ const messagesConfig = [
     {
         // Msg 3: Main (Index 3)
         text: `
-        <p class="red-title">Valentine's Day Set Menu:</p>
         <p class="red-title">MAINS: CHOICE OF 2:</p>
-        <p>1 Sirloin Steak Medium Rare w. Veg & Red Wine Jus.</p>
-        <p>2 Ooh La La Chicken w. Pumpkin Mash & Greens.</p>
+        <p>1 Sirloin Steak w. Veg & Red Wine Jus.</p>
+        <p>2 Chicken w. Pumpkin Mash & Greens.</p>
         <p>3 Salmon w. Veg, Salad & Lemon Mustard Sauce.</p>
-        <p>4 Pumpkin, Spinach, Feta Filo Parcel w. Salad.</p>
+        <p>4 Pumpkin, Spinach, Feta Filo w. Salad.</p>
         `,
         textColor: '#ffffff',
         fontSize: '15vh',
@@ -113,7 +111,6 @@ const messagesConfig = [
     {
         // Msg 4: Dessert (Index 4)
         text: `
-        <p class="red-title">Valentine's Day Set Menu:</p>
         <p class="red-title">DESSERT: SHARED PLATE:</p>
         <p>Chocolate Cheesecake, Apple Shortcake,</p>
         <p>Berries, Cream & Berry Sorbet</p>
