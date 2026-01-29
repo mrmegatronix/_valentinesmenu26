@@ -76,14 +76,13 @@ const messagesConfig = [
         // Msg 3: Main (Index 2)
         text: `
         <p class="red-title">Valentine's Day Set Menu</p>
-        <p>MAINS: CHOICE OF 2:</p>
-        <p>1 Sirloin Med Rare w. Veg & Jus.</p>
-        <p>2 Ooh La La Chicken w. Mash & Greens.</p>
-        <p>3 Salmon w. Veg, Salad & Sauce.</p>
-        <p>4 Pumpkin, Spinach, Feta Filo Parcel.</p>
+        <p>MAINS choice of 2:</p>
+        <p>Sirloin w. Veg & Jus</p>
+        <p>Chicken w. Mash & Greens</p>
+        <p>Salmon / Pumpkin Filo Parcel</p>
         `,
         textColor: '#ffffff',
-        fontSize: '13vh',
+        fontSize: '15vh',
         color: 'rgba(170, 0, 255, 0.5)',
         enlarged: true,
         compact: true,
