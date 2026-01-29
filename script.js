@@ -24,12 +24,14 @@ function createConfetti() {
     const duration = Math.random() * 10 + 10; // 10 to 20 seconds
     confetti.style.animationDuration = duration + 's';
 
-    document.getElementById('confetti-container').appendChild(confetti);
-
-    // Remove after animation
-    setTimeout(() => {
-        confetti.remove();
-    }, duration * 1000);
+    const container = document.getElementById('confetti-container');
+    if (container) {
+        container.appendChild(confetti);
+        // Remove after animation
+        setTimeout(() => {
+            confetti.remove();
+        }, duration * 1000);
+    }
 }
 
 // Create a new piece of confetti every 100ms
@@ -56,9 +58,27 @@ const messagesConfig = [
         duration: 60000
     },
     {
-        // Msg 2: Starter (Index 1)
+        // Msg 1.5: Deal (Index 1)
         text: `
-        <p class="red-title">Valentine's Day Set Menu</p>
+        <p class="red-title">Valentine's Day</p>
+        <p>3 Course Set Menu</p>
+        <p>1 Shared Starter Plate</p>
+        <p>Choice of 2 Mains</p>
+        <p>1 Shared Dessert Plate</p>
+        <p>$90 for Two</p>
+        `,
+        textColor: '#ffffff',
+        fontSize: '15vh',
+        color: 'rgba(255, 105, 180, 0.5)',
+        enlarged: false,
+        compact: false,
+        hideFooter: true,
+        duration: 60000
+    },
+    {
+        // Msg 2: Starter (Index 2)
+        text: `
+        <p class="red-title">Valentine's Day Set Menu:</p>
         <p>STARTER: SHARED PLATE:</p>
         <p>Crumbed Camembert w. Plum Sauce,</p>
         <p>Chicken Poppers w. Sriracha Aioli</p>
@@ -75,12 +95,12 @@ const messagesConfig = [
     {
         // Msg 3: Main (Index 2)
         text: `
-        <p class="red-title">Valentine's Day Set Menu</p>
-        <p>MAINS Choice of 2:</p>
-        <p>1 Sirloin w. Veg & Jus</p>
-        <p>2 Chicken w. Mash & Greens</p>
-        <p>3 Salmon w. Veg & Salad</p>
-        <p>4 Pumpkin & Feta Filo</p>
+        <p class="red-title">Valentine's Day Set Menu:</p>
+        <p>MAINS: CHOICE OF 2:</p>
+        <p>1 Sirloin Steak Medium Rare w. Veg & Red Wine Jus.</p>
+        <p>2 Ooh La La Chicken w. Pumpkin Mash & Greens.</p>
+        <p>3 Salmon w. Veg, Salad & Lemon Mustard Sauce.</p>
+        <p>4 Pumpkin, Spinach, Feta Filo Parcel w. Salad.</p>
         `,
         textColor: '#ffffff',
         fontSize: '15vh',
@@ -93,10 +113,10 @@ const messagesConfig = [
     {
         // Msg 4: Dessert (Index 3)
         text: `
-        <p class="red-title">Valentine's Day Set Menu</p>
-        <p>DESSERT shared plate:</p>
-        <p>Choc Cheesecake, Apple Shortcake,</p>
-        <p>Berries, Cream & Sorbet</p>
+        <p class="red-title">Valentine's Day Set Menu:</p>
+        <p>DESSERT: SHARED PLATE:</p>
+        <p>Chocolate Cheesecake, Apple Shortcake,</p>
+        <p>Berries, Cream & Berry Sorbet</p>
         `,
         textColor: '#ffffff',
         fontSize: '15vh',
@@ -127,13 +147,14 @@ const messagesConfig = [
     {
         // Msg 6: Contact & Price (Index 5)
         text: `
-        <p>Book Your Table for Two:</p>
-        <p>Call (03) 352 0210</p>
-        <p>coasterstavern.co.nz</p>
-        <p>$90 FOR TWO</p>
-        <div id="qr-placeholder" style="margin-top: 1vh; display: flex; flex-direction: column; align-items: center;">
+        <p>Book Online: coasterstavern.co.nz</p>
+        <p>or Call us: 352 0210</p>
+        <p>three five two ooh two one ohh</p>
+        <p>or Scan the Code Below:</p>
+                <div id="qr-placeholder" style="margin-top: 1vh; display: flex; flex-direction: column; align-items: center;">
            <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https%3A%2F%2Fbookings.nowbookit.com%2F%3Faccountid%3Dd7034cd3-cfde-4556-a98c-ea943ec35ef4%26venueid%3D13703%26theme%3Ddark%26colors%3Dhex%2Cff2d6f%26date%3D2026-02-14%26serviceids%3Devent" alt="Scan to Book" style="border: 2px solid white; border-radius: 10px; width: 25vh; height: 25vh;">
         </div>
+        <p>It's Only... $90 for TWO</p>
         `,
         textColor: '#ffffff',
         fontSize: '15vh',
@@ -149,7 +170,6 @@ let currentMessageIndex = 0;
 const messageContainer = document.querySelector('.message');
 const progressBar = document.querySelector('.progress-bar');
 const heartContainer = document.querySelector('.heart-container');
-const heartShape = document.querySelector('.heart');
 const root = document.documentElement;
 const bottomMessage = document.querySelector('.bottom-message');
 
@@ -160,7 +180,6 @@ function wrapWords(htmlString) {
     const tempDiv = document.createElement('div');
     tempDiv.innerHTML = htmlString;
     
-    // If empty text, return empty
     if (!tempDiv.innerText.trim() && !tempDiv.querySelector('img')) return '';
 
     const walk = document.createTreeWalker(tempDiv, NodeFilter.SHOW_TEXT, null, false);
@@ -192,31 +211,31 @@ function wrapWords(htmlString) {
 }
 
 function adjustFontSize(element, baseSize, callback) {
-    // Determine unit and start size
     const unit = 'vh';
     let size = parseFloat(baseSize) || 15;
     element.style.fontSize = size + unit;
 
-    // Safety margins: 96% of screen (Standard massive size)
+    // Safety margins: 96% of screen
     const maxH = window.innerHeight * 0.96;
     const maxW = window.innerWidth * 0.96;
 
     requestAnimationFrame(() => {
-        const minSize = 3; 
-
+        const minSize = 2; 
+        let iterations = 0;
+                
         // Loop until content fits within safety margins
-        while (size > minSize) {
-            // Check if both height and width fit
+        while (size > minSize && iterations < 200) {
             if (element.scrollHeight <= maxH && element.scrollWidth <= maxW) break;
-            
             size -= 0.1; 
             element.style.fontSize = size + unit;
+            iterations++;
         }
         if (callback) callback();
     });
 }
 
 function displayMessage(index) {
+    if (!messageContainer) return;
     if (cycleTimeout) clearTimeout(cycleTimeout);
     
     // 1. FADE OUT
@@ -242,13 +261,21 @@ function displayMessage(index) {
             progressBar.style.width = `${endPercent}%`;
         }
 
-        // 4. SWAP CONTENT (while invisible)
+        // 4. SWAP CONTENT
         root.style.setProperty('--heart-color', config.color);
         
-        if (config.enlarged) {
-            heartContainer.classList.add('enlarged');
-        } else {
-            heartContainer.classList.remove('enlarged');
+        if (heartContainer) {
+            if (config.enlarged) {
+                heartContainer.classList.add('enlarged');
+            } else {
+                heartContainer.classList.remove('enlarged');
+            }
+
+            if (index === 0) {
+                heartContainer.classList.remove('hidden-heart');
+            } else {
+                heartContainer.classList.add('hidden-heart');
+            }
         }
 
         if (config.compact) {
@@ -258,16 +285,7 @@ function displayMessage(index) {
         }
 
         if (bottomMessage) {
-            if (config.hideFooter) {
-                bottomMessage.classList.add('hidden');
-            } else {
-                const isFirstOrLast = (index === 0 || index === messagesConfig.length - 1);
-                if (!isFirstOrLast) {
-                    bottomMessage.classList.add('hidden');
-                } else {
-                    bottomMessage.classList.remove('hidden');
-                }
-            }
+            bottomMessage.classList.add('hidden');
         }
 
         messageContainer.style.color = config.textColor || '';
@@ -282,12 +300,6 @@ function displayMessage(index) {
         const words = messageContainer.querySelectorAll('.word');
         words.forEach(word => word.style.opacity = '0');
 
-        if (index === 0) {
-            heartContainer.classList.remove('hidden-heart');
-        } else {
-            heartContainer.classList.add('hidden-heart');
-        }
-
         // 5. ADJUST SIZE & REVEAL
         adjustFontSize(messageContainer, config.fontSize || '12vh', () => {
             requestAnimationFrame(() => {
@@ -296,7 +308,7 @@ function displayMessage(index) {
                     setTimeout(() => {
                         word.classList.add('visible');
                         word.style.opacity = '1';
-                    }, i * 200); 
+                    }, i * 500); 
                 });
             });
         });
@@ -315,5 +327,7 @@ function prevMessage() {
     displayMessage(currentMessageIndex);
 }
 
-// Initial Call
-displayMessage(currentMessageIndex);
+// Ensure deployment consistency by checking for elements before running
+window.addEventListener('load', () => {
+    displayMessage(currentMessageIndex);
+});

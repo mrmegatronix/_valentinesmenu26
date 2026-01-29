@@ -160,13 +160,13 @@ body {
   align-items: center;
   font-family: 'Dancing Script', cursive;
   font-weight: 1000;
-  font-size: inherit; /* Allow JS/inheritance to control size */
+  font-size: inherit;
   line-height: 0.95;
   color: #ffffff;
   text-shadow: 2px 2px 4px rgba(0,0,0,0.8), 0 0 10px rgba(0,0,0,0.5);
   padding: 1vh 0;
   opacity: 1;
-  pointer-events: none; /* Prevent interference with controls */
+  pointer-events: none;
 }
 
 .message.fade-out {
@@ -184,12 +184,12 @@ body {
 }
 
 .bottom-message {
-  display: none !important; /* Force hide everywhere */
+  display: none !important; /* Force hide everywhere as requested */
 }
 
 /* Enlarged Heart State (Full Screen Transition) */
 .heart-container.enlarged .heart {
-    transform: rotate(-45deg) scale(6); /* Massive scale to cover screen */
+    transform: rotate(-45deg) scale(6);
 }
 
 /* --- Progress Bar --- */
@@ -201,9 +201,8 @@ body {
     margin: 0 20px;
     height: 15px;
     background-color: #2e003e; 
-    z-index: 100;
-    border-radius: 10px;
     z-index: 9999 !important;
+    border-radius: 10px;
     border: 1px solid rgba(255, 255, 255, 0.3);
     box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }

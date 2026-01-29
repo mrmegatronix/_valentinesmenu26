@@ -160,13 +160,13 @@ body {
   align-items: center;
   font-family: 'Dancing Script', cursive;
   font-weight: 1000;
-  font-size: inherit; /* Allow JS/inheritance to control size */
+  font-size: inherit;
   line-height: 0.95;
   color: #ffffff;
   text-shadow: 2px 2px 4px rgba(0,0,0,0.8), 0 0 10px rgba(0,0,0,0.5);
   padding: 1vh 0;
   opacity: 1;
-  pointer-events: none; /* Prevent interference with controls */
+  pointer-events: none;
 }
 
 .message.fade-out {
@@ -184,63 +184,44 @@ body {
 }
 
 .bottom-message {
-  position: fixed;
-  bottom: 50px;
-  left: 0;
-  width: 100%;
-  text-align: center;
-  z-index: 100;
-  transition: opacity 1s ease-in-out;
-  opacity: 1;
-}
-
-.bottom-message p {
-    margin: 5px 0;
-    font-size: clamp(1rem, 2vh, 1.5rem);
-}
-
-.bottom-message.hidden {
-  display: none !important;
-  opacity: 0;
-  pointer-events: none;
+  display: none !important; /* Force hide everywhere as requested */
 }
 
 /* Enlarged Heart State (Full Screen Transition) */
 .heart-container.enlarged .heart {
-    transform: rotate(-45deg) scale(6); /* Massive scale to cover screen */
+    transform: rotate(-45deg) scale(6);
 }
-/* No change needed for message as it is independent now */
 
 /* --- Progress Bar --- */
 .progress-container {
     position: fixed;
-    bottom: 25px; /* Moved up to prevent heart clipping (15px bar + 15px heart overhang) */
+    bottom: 25px;
     left: 0;
     width: calc(100% - 40px); 
     margin: 0 20px;
     height: 15px;
     background-color: #2e003e; 
-    z-index: 100;
+    z-index: 9999 !important;
     border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
 
 .progress-bar {
     width: 0%;
     height: 100%;
-    border-radius: 10px; /* Rounded corners */
-    /* Red Glitter Effect */
+    border-radius: 10px;
     background: linear-gradient(45deg, #ff0000 25%, #cc0000 25%, #cc0000 50%, #ff0000 50%, #ff0000 75%, #cc0000 75%, #cc0000 100%);
     background-size: 10px 10px;
     box-shadow: 0 0 10px #ff0000, 0 0 20px #ff3366;
     position: relative;
-    transition: width linear; /* Controlled by JS or CSS transition */
+    transition: width linear;
 }
 
-/* Heart Indicator */
 .progress-bar::after {
     content: "❤";
     position: absolute;
-    right: -15px; /* Half width of heart roughly */
+    right: -15px;
     top: 50%;
     transform: translateY(-56%);
     font-size: 30px;
@@ -250,10 +231,9 @@ body {
     z-index: 101;
 }
 
-/* --- Text Animation --- */
 .word {
     opacity: 0;
-    display: inline-block; /* Allows transform if needed */
+    display: inline-block;
     transition: opacity 0.5s ease-in-out;
 }
 
@@ -266,13 +246,12 @@ body {
     object-fit: contain;
 }
 
-/* Hidden Controls */
 .controls {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    height: 80px; /* Larger trigger area */
+    height: 80px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -316,10 +295,6 @@ body {
     display: none !important;
 }
 
-.controls:hover {
-    opacity: 1;
-}
-
 .controls button {
     padding: 10px 20px;
     background: white;
@@ -329,11 +304,4 @@ body {
     font-family: inherit;
     font-weight: bold;
     border-radius: 5px;
-}
-
-/* Ensure Progress Bar is top-most visible */
-.progress-container {
-    z-index: 9999 !important; /* Force on top */
-    border: 1px solid rgba(255, 255, 255, 0.3); /* Visibility fix */
-    box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
