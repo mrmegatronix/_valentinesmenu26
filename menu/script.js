@@ -41,7 +41,6 @@ const messagesConfig = [
     {
         // Msg 1: Default Poem (Index 0)
         text: `
-        <p class="red-title">Valentine's Day Set Menu</p>
         <p>Roses are Red &</p>
         <p>Violets are Blue,</p>
         <p>Have you booked</p>
@@ -49,7 +48,7 @@ const messagesConfig = [
         <p>Two?</p>
         `,
         textColor: '#ffffff',
-        fontSize: '20vh',
+        fontSize: '15vh',
         color: '#ff3366',
         enlarged: false,
         compact: false,
@@ -66,7 +65,7 @@ const messagesConfig = [
         <p>& Cauli-bites w. Hot Honey.</p>
         `,
         textColor: '#ffffff',
-        fontSize: '18vh',
+        fontSize: '15vh',
         color: 'rgba(255, 0, 0, 0.5)',
         enlarged: true,
         compact: true,
@@ -84,7 +83,7 @@ const messagesConfig = [
         <p>4 Pumpkin, Spinach, Feta Filo Parcel.</p>
         `,
         textColor: '#ffffff',
-        fontSize: '15vh',
+        fontSize: '13vh',
         color: 'rgba(170, 0, 255, 0.5)',
         enlarged: true,
         compact: true,
@@ -100,7 +99,7 @@ const messagesConfig = [
         <p>Berries, Cream & Berry Sorbet</p>
         `,
         textColor: '#ffffff',
-        fontSize: '20vh',
+        fontSize: '15vh',
         color: 'rgba(0, 102, 255, 0.5)',
         enlarged: true,
         compact: true,
@@ -118,7 +117,7 @@ const messagesConfig = [
         <p>of Two!</p>
         `,
         textColor: '#ffffff',
-        fontSize: '20vh',
+        fontSize: '15vh',
         color: 'rgba(255, 20, 147, 0.5)',
         enlarged: true,
         compact: true,
@@ -232,12 +231,18 @@ function displayMessage(index) {
         const config = messagesConfig[index];
         const duration = config.duration || 60000;
 
-        // 3. RESET PROGRESS
+        // 3. UPDATE PROGRESS
+        const totalDuration = messagesConfig.reduce((sum, msg) => sum + (msg.duration || 60000), 0);
+        const accumulatedTime = messagesConfig.slice(0, index).reduce((sum, msg) => sum + (msg.duration || 60000), 0);
+        
+        const startPercent = (accumulatedTime / totalDuration) * 100;
+        const endPercent = ((accumulatedTime + duration) / totalDuration) * 100;
+
         progressBar.style.transition = 'none';
-        progressBar.style.width = '0%';
+        progressBar.style.width = `${startPercent}%`;
         void progressBar.offsetWidth; 
         progressBar.style.transition = `width ${duration}ms linear`;
-        progressBar.style.width = '100%';
+        progressBar.style.width = `${endPercent}%`;
 
         // 4. SWAP CONTENT (while invisible)
         root.style.setProperty('--heart-color', config.color);
@@ -254,14 +259,16 @@ function displayMessage(index) {
             messageContainer.classList.remove('compact');
         }
 
-        if (config.hideFooter) {
-            bottomMessage.classList.add('hidden');
-        } else {
-            const isFirstOrLast = (index === 0 || index === messagesConfig.length - 1);
-            if (!isFirstOrLast) {
+        if (bottomMessage) {
+            if (config.hideFooter) {
                 bottomMessage.classList.add('hidden');
             } else {
-                bottomMessage.classList.remove('hidden');
+                const isFirstOrLast = (index === 0 || index === messagesConfig.length - 1);
+                if (!isFirstOrLast) {
+                    bottomMessage.classList.add('hidden');
+                } else {
+                    bottomMessage.classList.remove('hidden');
+                }
             }
         }
 

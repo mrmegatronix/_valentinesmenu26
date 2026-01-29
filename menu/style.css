@@ -294,14 +294,17 @@ body {
     text-shadow: 2px 2px 4px rgba(0,0,0,0.9), 0 0 15px rgba(0,0,0,0.7) !important;
 }
 
-.red-title, .red-title p, .red-title .word {
+.content .message .red-title, 
+.content .message .red-title p, 
+.content .message .red-title .word {
     color: #ff0000 !important;
-    font-weight: bold;
+    font-weight: bold !important;
     font-size: 4vh !important; 
     margin-bottom: 0.5vh !important;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.8) !important;
     font-family: 'Outfit', sans-serif !important;
-    opacity: 1 !important; /* Ensure it is visible */
+    opacity: 1 !important;
+    display: block !important;
 }
 
 .hidden-heart {
