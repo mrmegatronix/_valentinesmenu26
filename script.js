@@ -35,120 +35,289 @@ function createConfetti() {
 // Create a new piece of confetti every 100ms
 setInterval(createConfetti, 100);
 
-const messages = [
-    ["Roses are Red &", "Violets are Blue,", "Have you booked", "Your table for", "Two?"],
-    ["Valentine's Day", "Set Menu", "STARTER: SHARED PLATE", "Camembert, Poppers", "& Cauli-bites"],
-    ["Valentine's Day", "Set Menu: MAIN", "Sirloin, Chicken,", "Salmon or", "Filo Parcel"],
-    ["Valentine's Day", "Set Menu: DESSERT", "SHARED PLATE:", "Cheesecake, Apple", "Shortcake & Sorbet"],
-    ["Hey You! Yes, You!", "You and Boo", "Should Come Too,", "Book Now,", "For Your Table", "of Two!"],
-    `<p>Ring us: 352 0210</p>
-     <p>(three five two ooh two one ohh)</p>
-     <p>It's Only...</p>
-     <p>$90 FOR TWO</p>
-     <div style="margin-top: 1vh; display: flex; flex-direction: column; align-items: center;">
-        <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https%3A%2F%2Fbookings.nowbookit.com%2F%3Faccountid%3Dd7034cd3-cfde-4556-a98c-ea943ec35ef4%26venueid%3D13703%26theme%3Ddark%26colors%3Dhex%2Cff2d6f%26date%3D2026-02-14%26serviceids%3Devent" alt="Scan to Book" style="border: 2px solid white; border-radius: 10px; width: 30vh; height: 30vh;">
-        <p style="font-size: 4vh; margin-top: 1vh; font-family: 'Outfit', sans-serif;">scan code to book your table</p>
-     </div>`
+// --- Message Cycling & Animation Logic ---
+
+const messagesConfig = [
+    {
+        // Msg 1: Default Poem (Index 0)
+        text: `
+        <p>Roses are Red &</p>
+        <p>Violets are Blue,</p>
+        <p>Have you booked</p>
+        <p>Your table for</p>
+        <p>Two?</p>
+        `,
+        textColor: '#ffffff',
+        fontSize: '15vh',
+        color: '#ff3366',
+        enlarged: false,
+        compact: false,
+        hideFooter: true,
+        duration: 60000
+    },
+    {
+        // Msg 2: Starter (Index 1)
+        text: `
+        <p class="red-title">Valentine's Day Set Menu</p>
+        <p>STARTER: SHARED PLATE:</p>
+        <p>Crumbed Camembert w. Plum Sauce,</p>
+        <p>Chicken Poppers w. Sriracha Aioli</p>
+        <p>& Cauli-bites w. Hot Honey.</p>
+        `,
+        textColor: '#ffffff',
+        fontSize: '15vh',
+        color: 'rgba(255, 0, 0, 0.5)',
+        enlarged: true,
+        compact: true,
+        hideFooter: true,
+        duration: 60000
+    },
+    {
+        // Msg 3: Main (Index 2)
+        text: `
+        <p class="red-title">Valentine's Day Set Menu</p>
+        <p>MAINS: CHOICE OF 2:</p>
+        <p>1 Sirloin Med Rare w. Veg & Jus.</p>
+        <p>2 Ooh La La Chicken w. Mash & Greens.</p>
+        <p>3 Salmon w. Veg, Salad & Sauce.</p>
+        <p>4 Pumpkin, Spinach, Feta Filo Parcel.</p>
+        `,
+        textColor: '#ffffff',
+        fontSize: '13vh',
+        color: 'rgba(170, 0, 255, 0.5)',
+        enlarged: true,
+        compact: true,
+        hideFooter: true,
+        duration: 60000
+    },
+    {
+        // Msg 4: Dessert (Index 3)
+        text: `
+        <p class="red-title">Valentine's Day Set Menu</p>
+        <p>DESSERT: SHARED PLATE:</p>
+        <p>Chocolate Cheesecake, Apple Shortcake,</p>
+        <p>Berries, Cream & Berry Sorbet</p>
+        `,
+        textColor: '#ffffff',
+        fontSize: '15vh',
+        color: 'rgba(0, 102, 255, 0.5)',
+        enlarged: true,
+        compact: true,
+        hideFooter: true,
+        duration: 60000
+    },
+    {
+        // Msg 5: Hey You! (Index 4)
+        text: `
+        <p>Hey You! Yes, You!</p>
+        <p>You and Boo</p>
+        <p>Should Come Too,</p>
+        <p>Book Now,</p>
+        <p>For Your Table</p>
+        <p>of Two!</p>
+        `,
+        textColor: '#ffffff',
+        fontSize: '15vh',
+        color: 'rgba(255, 20, 147, 0.5)',
+        enlarged: true,
+        compact: true,
+        hideFooter: true,
+        duration: 60000
+    },
+    {
+        // Msg 6: Contact & Price (Index 5)
+        text: `
+        <p>So to book your table of Two, Just Call us on: </p>
+        <p>(three five two ooh two one ohh) (352 0210) </p>
+        <p> Or book online at: coasterstaver.co.nz, or scan the code below...</p>
+        <br>
+        <p>It's Only...</p>
+        <p>$90 FOR TWO</p>
+        <br>
+        <div id="qr-placeholder" style="margin-top: 1vh; display: flex; flex-direction: column; align-items: center;">
+           <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https%3A%2F%2Fbookings.nowbookit.com%2F%3Faccountid%3Dd7034cd3-cfde-4556-a98c-ea943ec35ef4%26venueid%3D13703%26theme%3Ddark%26colors%3Dhex%2Cff2d6f%26date%3D2026-02-14%26serviceids%3Devent" alt="Scan to Book" style="border: 2px solid white; border-radius: 10px; width: 28vh; height: 28vh;">
+        <br>
+        </div>
+        `,
+        textColor: '#ffffff',
+        fontSize: '15vh',
+        color: '#ff3366',
+        enlarged: false,
+        compact: true,
+        hideFooter: true,
+        duration: 60000
+    }
 ];
 
 let currentMessageIndex = 0;
 const messageContainer = document.querySelector('.message');
-
-const heartContainer = document.querySelector('.heart-container');
 const progressBar = document.querySelector('.progress-bar');
+const heartContainer = document.querySelector('.heart-container');
+const heartShape = document.querySelector('.heart');
+const root = document.documentElement;
+const bottomMessage = document.querySelector('.bottom-message');
+
 let cycleTimeout;
 
-const durations = [
-    60000, // Msg 1: 1 minute
-    60000, // Msg 2: 1 minute
-    60000, // Msg 3: 1 minute
-    60000, // Msg 4: 1 minute
-    60000, // Msg 5: 1 minute
-    60000  // Msg 6: 1 minute
-];
+function wrapWords(htmlString) {
+    if (!htmlString) return '';
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = htmlString;
+    
+    // If empty text, return empty
+    if (!tempDiv.innerText.trim() && !tempDiv.querySelector('img')) return '';
 
-function adjustFontSize(element, targetSize, callback) {
-    // STANDARD MASSIVE SIZE: 15vh (25% increase from previous 12vh)
-    const baseSize = 15; 
+    const walk = document.createTreeWalker(tempDiv, NodeFilter.SHOW_TEXT, null, false);
+    let node;
+    const textNodes = [];
+    while (node = walk.nextNode()) {
+        textNodes.push(node);
+    }
+
+    for (const textNode of textNodes) {
+        let textContent = textNode.nodeValue;
+        const words = textContent.split(/(\s+)/); 
+        
+        const fragment = document.createDocumentFragment();
+        words.forEach(word => {
+            if (word.trim().length === 0) {
+                 fragment.appendChild(document.createTextNode(word));
+            } else {
+                const span = document.createElement('span');
+                span.textContent = word;
+                span.className = 'word';
+                fragment.appendChild(span);
+            }
+        });
+        textNode.parentNode.replaceChild(fragment, textNode);
+    }
+    
+    return tempDiv.innerHTML;
+}
+
+function adjustFontSize(element, baseSize, callback) {
+    // Determine unit and start size
     const unit = 'vh';
-    element.style.fontSize = baseSize + unit;
+    let size = parseFloat(baseSize) || 15;
+    element.style.fontSize = size + unit;
 
-    // Use 96% safe zone for a "fill screen" look
-    const maxH = window.innerHeight * 0.96; 
+    // Safety margins: 96% of screen (Standard massive size)
+    const maxH = window.innerHeight * 0.96;
     const maxW = window.innerWidth * 0.96;
 
     requestAnimationFrame(() => {
-        let size = baseSize;
-        let attempts = 0;
-        
-        // Only shrink if it exceeds the safe zone, ensuring consistency where possible
-        while (attempts < 60 && (element.scrollHeight > maxH || element.scrollWidth > maxW)) {
-            size -= 0.1; // Very fine-grained for maximum possible size
+        const minSize = 3; 
+
+        // Loop until content fits within safety margins
+        while (size > minSize) {
+            // Check if both height and width fit
+            if (element.scrollHeight <= maxH && element.scrollWidth <= maxW) break;
+            
+            size -= 0.1; 
             element.style.fontSize = size + unit;
-            attempts++;
-            if (size < 4) break; 
         }
-        
         if (callback) callback();
     });
 }
 
-function updateMessage() {
-    if (!messageContainer || !heartContainer || !progressBar) return;
-
+function displayMessage(index) {
     if (cycleTimeout) clearTimeout(cycleTimeout);
-
+    
     // 1. FADE OUT
     messageContainer.classList.add('fade-out');
 
-    // 2. WAIT FOR FADE
+    // 2. WAIT FOR FADE (1s)
     setTimeout(() => {
-        currentMessageIndex = (currentMessageIndex + 1) % messages.length;
-        const nextMessage = messages[currentMessageIndex];
-        const duration = durations[currentMessageIndex];
+        const config = messagesConfig[index];
+        const duration = config.duration || 60000;
+
+        // 3. UPDATE PROGRESS
+        const totalDuration = messagesConfig.reduce((sum, msg) => sum + (msg.duration || 60000), 0);
+        const accumulatedTime = messagesConfig.slice(0, index).reduce((sum, msg) => sum + (msg.duration || 60000), 0);
         
-        // 3. RESET PROGRESS (no transition)
-        progressBar.style.transition = 'none';
-        progressBar.style.width = '0%';
-        void progressBar.offsetWidth; 
-        progressBar.style.transition = `width ${duration}ms linear`;
-        progressBar.style.width = '100%';
+        const startPercent = (accumulatedTime / totalDuration) * 100;
+        const endPercent = ((accumulatedTime + duration) / totalDuration) * 100;
+
+        if (progressBar) {
+            progressBar.style.transition = 'none';
+            progressBar.style.width = `${startPercent}%`;
+            void progressBar.offsetWidth; 
+            progressBar.style.transition = `width ${duration}ms linear`;
+            progressBar.style.width = `${endPercent}%`;
+        }
 
         // 4. SWAP CONTENT (while invisible)
-        if (Array.isArray(nextMessage)) {
-            messageContainer.innerHTML = nextMessage
-                .map(line => `<p>${line}</p>`)
-                .join('');
+        root.style.setProperty('--heart-color', config.color);
+        
+        if (config.enlarged) {
+            heartContainer.classList.add('enlarged');
         } else {
-            messageContainer.innerHTML = nextMessage;
+            heartContainer.classList.remove('enlarged');
         }
 
-        if (currentMessageIndex === 0) {
-            heartContainer.style.opacity = '1';
-            heartContainer.style.visibility = 'visible';
-            messageContainer.style.color = '#000000';
-            messageContainer.classList.remove('full-screen');
+        if (config.compact) {
+            messageContainer.classList.add('compact');
         } else {
-            heartContainer.style.opacity = '0';
-            heartContainer.style.visibility = 'hidden';
-            messageContainer.style.color = '#ffffff';
-            messageContainer.classList.add('full-screen');
+            messageContainer.classList.remove('compact');
         }
 
-        // 5. MAXIMIZE SIZE & FADE IN
-        // Standardize everything to 15vh for consistency
-        adjustFontSize(messageContainer, '15vh', () => {
+        if (bottomMessage) {
+            if (config.hideFooter) {
+                bottomMessage.classList.add('hidden');
+            } else {
+                const isFirstOrLast = (index === 0 || index === messagesConfig.length - 1);
+                if (!isFirstOrLast) {
+                    bottomMessage.classList.add('hidden');
+                } else {
+                    bottomMessage.classList.remove('hidden');
+                }
+            }
+        }
+
+        messageContainer.style.color = config.textColor || '';
+        if (config.textColor === '#ffffff') {
+            messageContainer.classList.add('white-text');
+        } else {
+            messageContainer.classList.remove('white-text');
+        }
+
+        messageContainer.innerHTML = wrapWords(config.text);
+        
+        const words = messageContainer.querySelectorAll('.word');
+        words.forEach(word => word.style.opacity = '0');
+
+        if (index === 0) {
+            heartContainer.classList.remove('hidden-heart');
+        } else {
+            heartContainer.classList.add('hidden-heart');
+        }
+
+        // 5. ADJUST SIZE & REVEAL
+        adjustFontSize(messageContainer, config.fontSize || '12vh', () => {
             requestAnimationFrame(() => {
                 messageContainer.classList.remove('fade-out');
+                words.forEach((word, i) => {
+                    setTimeout(() => {
+                        word.classList.add('visible');
+                        word.style.opacity = '1';
+                    }, i * 200); 
+                });
             });
         });
 
-        cycleTimeout = setTimeout(updateMessage, duration);
-    }, 1000); 
+        cycleTimeout = setTimeout(nextMessage, duration);
+    }, 1000);
 }
 
-// Initial progress bar trigger
-const initialDuration = durations[0];
-progressBar.style.transition = `width ${initialDuration}ms linear`;
-progressBar.style.width = '100%';
-cycleTimeout = setTimeout(updateMessage, initialDuration);
+function nextMessage() {
+    currentMessageIndex = (currentMessageIndex + 1) % messagesConfig.length;
+    displayMessage(currentMessageIndex);
+}
+
+function prevMessage() {
+    currentMessageIndex = (currentMessageIndex - 1 + messagesConfig.length) % messagesConfig.length;
+    displayMessage(currentMessageIndex);
+}
+
+// Initial Call
+displayMessage(currentMessageIndex);
