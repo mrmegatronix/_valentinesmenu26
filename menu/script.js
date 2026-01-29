@@ -193,31 +193,26 @@ function wrapWords(htmlString) {
     return tempDiv.innerHTML;
 }
 
-function adjustFontSize(element, targetSize, callback) {
-    // STANDARD MASSIVE SIZE: 15vh (25% increase from previous 12vh)
-    const baseSize = 15; 
+function adjustFontSize(element, baseSize, callback) {
+    // Determine unit and start size
     const unit = 'vh';
-    element.style.fontSize = baseSize + unit;
+    let size = parseFloat(baseSize) || 15;
+    element.style.fontSize = size + unit;
 
-    const maxH = window.innerHeight * 0.96;
-    const maxW = window.innerWidth * 0.96;
+    // Safety margins: 90% of screen to account for TV overscan and margins
+    const maxH = window.innerHeight * 0.90;
+    const maxW = window.innerWidth * 0.90;
 
     requestAnimationFrame(() => {
-        let size = baseSize;
-        let attempts = 0;
-        const minSize = 4; 
+        const minSize = 3; 
 
-        while (attempts < 60) {
+        // Loop until content fits within safety margins
+        while (size > minSize) {
+            // Check if both height and width fit
             if (element.scrollHeight <= maxH && element.scrollWidth <= maxW) break;
             
             size -= 0.1; 
-            if (size < minSize) {
-                size = minSize;
-                element.style.fontSize = size + unit;
-                break;
-            }
             element.style.fontSize = size + unit;
-            attempts++;
         }
         if (callback) callback();
     });

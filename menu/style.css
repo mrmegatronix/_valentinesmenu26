@@ -255,7 +255,6 @@ body {
     opacity: 0;
     display: inline-block; /* Allows transform if needed */
     transition: opacity 0.5s ease-in-out;
-    margin-right: 0.2em; /* Ensure spaces between words */
 }
 
 .word.visible {
