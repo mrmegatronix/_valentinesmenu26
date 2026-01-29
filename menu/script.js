@@ -41,6 +41,7 @@ const messagesConfig = [
     {
         // Msg 1: Default Poem (Index 0)
         text: `
+        <p class="red-title">Valentine's Day Set Menu</p>
         <p>Roses are Red &</p>
         <p>Violets are Blue,</p>
         <p>Have you booked</p>
@@ -48,23 +49,24 @@ const messagesConfig = [
         <p>Two?</p>
         `,
         textColor: '#ffffff',
-        fontSize: '15vh',
+        fontSize: '20vh',
         color: '#ff3366',
         enlarged: false,
         compact: false,
-        hideFooter: false,
+        hideFooter: true,
         duration: 60000
     },
     {
         // Msg 2: Starter (Index 1)
         text: `
+        <p class="red-title">Valentine's Day Set Menu</p>
         <p>STARTER: SHARED PLATE:</p>
         <p>Crumbed Camembert w. Plum Sauce,</p>
         <p>Chicken Poppers w. Sriracha Aioli</p>
         <p>& Cauli-bites w. Hot Honey.</p>
         `,
         textColor: '#ffffff',
-        fontSize: '12vh',
+        fontSize: '18vh',
         color: 'rgba(255, 0, 0, 0.5)',
         enlarged: true,
         compact: true,
@@ -74,6 +76,7 @@ const messagesConfig = [
     {
         // Msg 3: Main (Index 2)
         text: `
+        <p class="red-title">Valentine's Day Set Menu</p>
         <p>MAINS: CHOICE OF 2:</p>
         <p>1 Sirloin Med Rare w. Veg & Jus.</p>
         <p>2 Ooh La La Chicken w. Mash & Greens.</p>
@@ -81,7 +84,7 @@ const messagesConfig = [
         <p>4 Pumpkin, Spinach, Feta Filo Parcel.</p>
         `,
         textColor: '#ffffff',
-        fontSize: '12vh',
+        fontSize: '15vh',
         color: 'rgba(170, 0, 255, 0.5)',
         enlarged: true,
         compact: true,
@@ -91,12 +94,13 @@ const messagesConfig = [
     {
         // Msg 4: Dessert (Index 3)
         text: `
+        <p class="red-title">Valentine's Day Set Menu</p>
         <p>DESSERT: SHARED PLATE:</p>
         <p>Chocolate Cheesecake, Apple Shortcake,</p>
         <p>Berries, Cream & Berry Sorbet</p>
         `,
         textColor: '#ffffff',
-        fontSize: '12vh',
+        fontSize: '20vh',
         color: 'rgba(0, 102, 255, 0.5)',
         enlarged: true,
         compact: true,
@@ -114,7 +118,7 @@ const messagesConfig = [
         <p>of Two!</p>
         `,
         textColor: '#ffffff',
-        fontSize: '12vh',
+        fontSize: '20vh',
         color: 'rgba(255, 20, 147, 0.5)',
         enlarged: true,
         compact: true,
@@ -124,10 +128,9 @@ const messagesConfig = [
     {
         // Msg 6: Contact & Price (Index 5)
         text: `
-        <p>So to book your table of Two<p>
-        <p>Just Call us on: </p>
+        <p>So to book your table of Two, Just Call us on: </p>
         <p>(three five two ooh two one ohh) (352 0210) </p>
-        <p> Or book online at: coasterstaver.co.nz, or scan thee code below...</p>
+        <p> Or book online at: coasterstaver.co.nz, or scan the code below...</p>
         <br>
         <p>It's Only...</p>
         <p>$90 FOR TWO</p>
@@ -138,7 +141,7 @@ const messagesConfig = [
         </div>
         `,
         textColor: '#ffffff',
-        fontSize: '12vh',
+        fontSize: '15vh',
         color: '#ff3366',
         enlarged: false,
         compact: true,
@@ -199,9 +202,9 @@ function adjustFontSize(element, baseSize, callback) {
     let size = parseFloat(baseSize) || 15;
     element.style.fontSize = size + unit;
 
-    // Safety margins: 90% of screen to account for TV overscan and margins
-    const maxH = window.innerHeight * 0.90;
-    const maxW = window.innerWidth * 0.90;
+    // Safety margins: 96% of screen (Standard massive size)
+    const maxH = window.innerHeight * 0.96;
+    const maxW = window.innerWidth * 0.96;
 
     requestAnimationFrame(() => {
         const minSize = 3; 
@@ -251,11 +254,15 @@ function displayMessage(index) {
             messageContainer.classList.remove('compact');
         }
 
-        const isFirstOrLast = (index === 0 || index === messagesConfig.length - 1);
-        if (!isFirstOrLast) {
+        if (config.hideFooter) {
             bottomMessage.classList.add('hidden');
         } else {
-            bottomMessage.classList.remove('hidden');
+            const isFirstOrLast = (index === 0 || index === messagesConfig.length - 1);
+            if (!isFirstOrLast) {
+                bottomMessage.classList.add('hidden');
+            } else {
+                bottomMessage.classList.remove('hidden');
+            }
         }
 
         messageContainer.style.color = config.textColor || '';
@@ -284,7 +291,6 @@ function displayMessage(index) {
                     setTimeout(() => {
                         word.classList.add('visible');
                         word.style.opacity = '1';
-                        word.style.color = '#ffffff';
                     }, i * 200); 
                 });
             });
