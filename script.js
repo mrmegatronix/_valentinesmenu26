@@ -1,47 +1,42 @@
+// --- Confetti Logic ---
 function createConfetti() {
     const isLogo = Math.random() > 0.7; // 30% chance for logo
     const confetti = document.createElement('div');
 
     if (isLogo) {
         confetti.classList.add('logo-confetti');
+        // Note: Ensure logo.png is in the same folder or adjust path
         confetti.style.backgroundImage = "url('logo.png')";
-        const size = Math.random() * 20 + 30; // 30px to 50px
+        const size = Math.random() * 20 + 30; 
         confetti.style.width = size + 'px';
         confetti.style.height = size + 'px';
     } else {
         confetti.classList.add('heart-confetti');
         confetti.innerHTML = '❤';
-        const size = Math.random() * 1 + 0.5; // 0.5rem to 1.5rem
+        const size = Math.random() * 1 + 0.5; 
         confetti.style.fontSize = size + 'rem';
         const colors = ['#ff69b4', '#ff1493', '#db7093', '#ffc0cb'];
         confetti.style.color = colors[Math.floor(Math.random() * colors.length)];
     }
 
-    // Randomize position
     confetti.style.left = Math.random() * 100 + 'vw';
-
-    // Randomize animation duration (slow falling)
-    const duration = Math.random() * 10 + 10; // 10 to 20 seconds
+    const duration = Math.random() * 10 + 10; 
     confetti.style.animationDuration = duration + 's';
 
     const container = document.getElementById('confetti-container');
     if (container) {
         container.appendChild(confetti);
-        // Remove after animation
         setTimeout(() => {
             confetti.remove();
         }, duration * 1000);
     }
 }
 
-// Create a new piece of confetti every 100ms
 setInterval(createConfetti, 100);
 
-// --- Message Cycling & Animation Logic ---
-
+// --- Message Configuration ---
 const messagesConfig = [
     {
-        // Msg 1: Default Poem (Index 0)
         text: `
         <p>Roses are Red &</p>
         <p>Violets are Blue,</p>
@@ -50,15 +45,13 @@ const messagesConfig = [
         <p>Two?</p>
         `,
         textColor: '#ffffff',
-        fontSize: '13vh',
+        fontSize: '15vh',
         color: '#ff3366',
         enlarged: false,
         compact: false,
-        hideFooter: true,
         duration: 60000
     },
     {
-        // Msg 1.5: Deal (Index 1)
         text: `
         <p class="red-title">Valentine's Day</p>
         <p class="red-title">3 Course Set Menu</p>
@@ -68,15 +61,13 @@ const messagesConfig = [
         <p class="red-title">$90 for Two</p>
         `,
         textColor: '#ffffff',
-        fontSize: '13vh',
+        fontSize: '15vh',
         color: 'rgba(255, 105, 180, 0.5)',
         enlarged: false,
         compact: false,
-        hideFooter: true,
         duration: 60000
     },
     {
-        // Msg 2: Starter (Index 2)
         text: `
         <p class="red-title">Valentine's Day Set Menu:</p>
         <p class="red-title">STARTER: SHARED PLATE:</p>
@@ -85,15 +76,13 @@ const messagesConfig = [
         <p>& Cauli-bites w. Hot Honey.</p>
         `,
         textColor: '#ffffff',
-        fontSize: '13vh',
+        fontSize: '15vh',
         color: 'rgba(255, 0, 0, 0.5)',
         enlarged: true,
         compact: true,
-        hideFooter: true,
         duration: 60000
     },
     {
-        // Msg 3: Mains (Index 3) - Re-created for fresh state with manual adjustments
         text: `
         <p class="red-title">Valentine's Day Set Menu:</p>
         <p class="red-title">MAINS: CHOICE OF 2:</p>
@@ -103,15 +92,14 @@ const messagesConfig = [
         <p>4 Pumpkin, Spinach, Feta Filo.</p>
         `,
         textColor: '#ffffff',
-        fontSize: '13vh',
+        fontSize: '15vh',
         color: 'rgba(170, 0, 255, 0.5)',
         enlarged: true,
         compact: true,
-        hideFooter: true,
+        mainsText: true,
         duration: 60000
     },
     {
-        // Msg 4: Dessert (Index 4)
         text: `
         <p class="red-title">Valentine's Day Set Menu:</p>
         <p class="red-title">DESSERT: SHARED PLATE:</p>
@@ -119,15 +107,13 @@ const messagesConfig = [
         <p>Berries, Cream & Berry Sorbet</p>
         `,
         textColor: '#ffffff',
-        fontSize: '13vh',
+        fontSize: '15vh',
         color: 'rgba(0, 102, 255, 0.5)',
         enlarged: true,
         compact: true,
-        hideFooter: true,
         duration: 60000
     },
     {
-        // Msg 5: Hey You! (Index 5)
         text: `
         <p>Hey You! Yes, You!</p>
         <p>You and Boo</p>
@@ -137,15 +123,13 @@ const messagesConfig = [
         <p>of Two!</p>
         `,
         textColor: '#ffffff',
-        fontSize: '13vh',
+        fontSize: '15vh',
         color: 'rgba(255, 20, 147, 0.5)',
         enlarged: true,
         compact: true,
-        hideFooter: true,
         duration: 60000
     },
     {
-        // Msg 6: Contact & Price (Index 6)
         text: `
         <p>Book Online: coasterstavern.co.nz</p>
         <p>or Call us: 352 0210</p>
@@ -156,11 +140,10 @@ const messagesConfig = [
         <p>It's Only... $90 for TWO</p>
         `,
         textColor: '#ffffff',
-        fontSize: '13vh',
+        fontSize: '15vh',
         color: '#ff3366',
         enlarged: false,
         compact: true,
-        hideFooter: true,
         duration: 60000
     }
 ];
@@ -170,8 +153,6 @@ const messageContainer = document.querySelector('.message');
 const progressBar = document.querySelector('.progress-bar');
 const heartContainer = document.querySelector('.heart-container');
 const root = document.documentElement;
-const bottomMessage = document.querySelector('.bottom-message');
-
 let cycleTimeout;
 
 function wrapWords(htmlString) {
@@ -184,14 +165,11 @@ function wrapWords(htmlString) {
     const walk = document.createTreeWalker(tempDiv, NodeFilter.SHOW_TEXT, null, false);
     let node;
     const textNodes = [];
-    while (node = walk.nextNode()) {
-        textNodes.push(node);
-    }
+    while (node = walk.nextNode()) textNodes.push(node);
 
     for (const textNode of textNodes) {
         let textContent = textNode.nodeValue;
         const words = textContent.split(/(\s+)/); 
-        
         const fragment = document.createDocumentFragment();
         words.forEach(word => {
             if (word.trim().length === 0) {
@@ -205,7 +183,6 @@ function wrapWords(htmlString) {
         });
         textNode.parentNode.replaceChild(fragment, textNode);
     }
-    
     return tempDiv.innerHTML;
 }
 
@@ -214,18 +191,17 @@ function adjustFontSize(element, baseSize, callback) {
     let size = parseFloat(baseSize) || 15;
     element.style.fontSize = size + unit;
 
-    // Safety margins: 96% of screen
-    const maxH = window.innerHeight * 0.96;
-    const maxW = window.innerWidth * 0.96;
+    // Maximize screen usage
+    const maxH = window.innerHeight * 0.92;
+    const maxW = window.innerWidth * 0.98;
 
     requestAnimationFrame(() => {
         const minSize = 2; 
         let iterations = 0;
-                
-        // Loop until content fits within safety margins
-        while (size > minSize && iterations < 200) {
+        
+        while (size > minSize && iterations < 300) {
             if (element.scrollHeight <= maxH && element.scrollWidth <= maxW) break;
-            size -= 0.1; 
+            size -= 0.1;
             element.style.fontSize = size + unit;
             iterations++;
         }
@@ -237,19 +213,15 @@ function displayMessage(index) {
     if (!messageContainer) return;
     if (cycleTimeout) clearTimeout(cycleTimeout);
     
-    // 1. FADE OUT
     messageContainer.classList.add('fade-out');
 
-    // 2. WAIT FOR FADE (1s)
     setTimeout(() => {
         const config = messagesConfig[index];
         const duration = config.duration || 60000;
-        console.log(`Displaying Slide ${index}:`, config.text.substring(0, 50).replace(/<[^>]*>/g, '').trim());
 
-        // 3. UPDATE PROGRESS
+        // Progress Bar
         const totalDuration = messagesConfig.reduce((sum, msg) => sum + (msg.duration || 60000), 0);
         const accumulatedTime = messagesConfig.slice(0, index).reduce((sum, msg) => sum + (msg.duration || 60000), 0);
-        
         const startPercent = (accumulatedTime / totalDuration) * 100;
         const endPercent = ((accumulatedTime + duration) / totalDuration) * 100;
 
@@ -261,73 +233,25 @@ function displayMessage(index) {
             progressBar.style.width = `${endPercent}%`;
         }
 
-        // 4. SWAP CONTENT
+        // Update Content
         root.style.setProperty('--heart-color', config.color);
-        
-        if (heartContainer) {
-            if (config.enlarged) {
-                heartContainer.classList.add('enlarged');
-            } else {
-                heartContainer.classList.remove('enlarged');
-            }
-
-            if (index === 0) {
-                heartContainer.classList.remove('hidden-heart');
-            } else {
-                heartContainer.classList.add('hidden-heart');
-            }
-        }
-
-        if (config.compact) {
-            messageContainer.classList.add('compact');
-        } else {
-            messageContainer.classList.remove('compact');
-        }
-
-        if (bottomMessage) {
-            bottomMessage.classList.add('hidden');
-        }
-
+        heartContainer.classList.toggle('enlarged', config.enlarged);
+        heartContainer.classList.toggle('hidden-heart', index !== 0);
+        messageContainer.classList.toggle('compact', config.compact);
+        messageContainer.classList.toggle('mains-text', config.mainsText);
+        messageContainer.classList.toggle('white-text', config.textColor === '#ffffff');
         messageContainer.style.color = config.textColor || '';
-        if (config.textColor === '#ffffff') {
-            messageContainer.classList.add('white-text');
-        } else {
-            messageContainer.classList.remove('white-text');
-        }
-
         messageContainer.innerHTML = wrapWords(config.text);
         
         const words = messageContainer.querySelectorAll('.word');
-        words.forEach(word => word.style.opacity = '0');
-
-        // 5. ADJUST SIZE & REVEAL
-        adjustFontSize(messageContainer, config.fontSize || '12vh', () => {
-            requestAnimationFrame(() => {
-                messageContainer.classList.remove('fade-out');
-                words.forEach((word, i) => {
-                    setTimeout(() => {
-                        word.classList.add('visible');
-                        word.style.opacity = '1';
-                    }, i * 500); 
-                });
-            });
+        
+        adjustFontSize(messageContainer, config.fontSize || '15vh', () => {
+            messageContainer.classList.remove('fade-out');
+            words.forEach((word, i) => setTimeout(() => word.classList.add('visible'), i * 500));
         });
 
-        cycleTimeout = setTimeout(nextMessage, duration);
+        cycleTimeout = setTimeout(() => displayMessage((index + 1) % messagesConfig.length), duration);
     }, 1000);
 }
 
-function nextMessage() {
-    currentMessageIndex = (currentMessageIndex + 1) % messagesConfig.length;
-    displayMessage(currentMessageIndex);
-}
-
-function prevMessage() {
-    currentMessageIndex = (currentMessageIndex - 1 + messagesConfig.length) % messagesConfig.length;
-    displayMessage(currentMessageIndex);
-}
-
-// Ensure deployment consistency by checking for elements before running
-window.addEventListener('load', () => {
-    displayMessage(currentMessageIndex);
-});
+window.addEventListener('load', () => displayMessage(currentMessageIndex));

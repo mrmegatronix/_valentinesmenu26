@@ -136,8 +136,8 @@ body {
   transition: opacity 1s ease-in-out, font-size 0.3s ease;
   
   /* Maximize space for text */
-  width: 98vw;
-  max-height: 92vh;
+  width: 80vw;
+  max-height: 80vh;
   
   display: flex;
   flex-direction: column;
@@ -161,20 +161,11 @@ body {
 
 .message p {
   margin: 2px 0;
-  white-space: nowrap; /* Prevents wrapping to keep text large */
+  white-space: normal;
 }
 
 .message.compact {
   line-height: 1;
-}
-
-.mains-text {
-  line-height: 0.85 !important;
-}
-
-.mains-text p {
-  white-space: nowrap !important;
-  margin: 0.1vh 0 !important;
 }
 
 /* --- Text Colors & Effects --- */
@@ -193,7 +184,7 @@ body {
   font-family: "Dancing Script", cursive !important;
   opacity: 1 !important;
   display: block !important;
-  white-space: nowrap !important;
+  white-space: normal !important;
   margin-bottom: 0.5vh !important;
 }
 

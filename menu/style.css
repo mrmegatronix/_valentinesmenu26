@@ -152,8 +152,8 @@ body {
   text-align: center;
   z-index: 20;
   transition: opacity 1s ease-in-out, font-size 0.3s ease;
-  width: 95vw;
-  max-height: 85vh;
+  width: 98vw;
+  max-height: 92vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -325,6 +325,6 @@ body {
 }
 
 .mains-text p {
-    white-space: normal !important;
+    white-space: nowrap !important;
     margin: 0.1vh 0 !important;
 }
